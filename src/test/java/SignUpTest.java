@@ -20,6 +20,8 @@ public class SignUpTest {
         driver.get("http://www.kurs-selenium.pl/demo/");
 
         String lastName = "Testowy";
+        int randomNumber = (int) (Math.random()*1000);
+        String email = "testerkh" + randomNumber + "@tester.pl";
         driver.findElements(By.xpath("//li[@id='li_myaccount']"))
                 .stream()
                 .filter(WebElement::isDisplayed)
@@ -29,7 +31,7 @@ public class SignUpTest {
         driver.findElement(By.name("firstname")).sendKeys("Kamil");
         driver.findElement(By.name("lastname")).sendKeys(lastName);
         driver.findElement(By.name("phone")).sendKeys("511222323");
-        driver.findElement(By.name("email")).sendKeys("testkh2@test.pl");
+        driver.findElement(By.name("email")).sendKeys(email);
         driver.findElement(By.name("password")).sendKeys("Test123!");
         driver.findElement(By.name("confirmpassword")).sendKeys("Test123!");
         driver.findElement(By.xpath("//button[@type='submit' and text()=' Sign Up']")).click();
