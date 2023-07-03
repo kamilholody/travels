@@ -1,25 +1,17 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class HotelSearch {
+public class HotelSearchTest extends BaseTest {
+
 
     @Test
-    public void searchHotel() throws InterruptedException {
+    public void searchHotelTest() throws InterruptedException {
 
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("http://www.kurs-selenium.pl/demo/");
         // Line of code created by Me
 //        WebElement searchField = driver.findElement(By.cssSelector(".select2-choice"));
 //        searchField.click();
@@ -55,16 +47,11 @@ public class HotelSearch {
         Assert.assertEquals("Oasis Beach Tower", hotelNames.get(1));
         Assert.assertEquals("Rose Rayhaan Rotana", hotelNames.get(2));
         Assert.assertEquals("Hyatt Regency Perth", hotelNames.get(3));
+
     }
 
     @Test
-    public void negativePathSearchHotel() {
-
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("http://www.kurs-selenium.pl/demo/");
+    public void negativePathSearchHotelTest() {
 
         driver.findElement(By.name("checkin")).sendKeys("24/07/2023");
         driver.findElement(By.name("checkout")).click();
@@ -87,5 +74,6 @@ public class HotelSearch {
 
         Assert.assertTrue(message.isDisplayed());
         Assert.assertEquals(message.getText(), "No Results Found");
+
     }
 }
