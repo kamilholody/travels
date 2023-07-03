@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -72,6 +73,15 @@ public class SignUpTest {
         Assert.assertEquals("The Password field is required.", heading.get(2));
         Assert.assertEquals("The First name field is required.", heading.get(3));
         Assert.assertEquals("The Last Name field is required.", heading.get(4));
+
+        // miękka asercja
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(heading.contains("The Email field is required."));
+        softAssert.assertTrue(heading.contains("The Password field is required."));
+        softAssert.assertTrue(heading.contains("The Password field is required."));
+        softAssert.assertTrue(heading.contains("The First name field is required."));
+        softAssert.assertTrue(heading.contains("The Last Name field is required."));
+        softAssert.assertAll();
         driver.quit();
 
     }
@@ -97,10 +107,13 @@ public class SignUpTest {
         driver.findElement(By.name("password")).sendKeys("Test123!");
         driver.findElement(By.name("confirmpassword")).sendKeys("Test123!");
         driver.findElement(By.xpath("//button[@type='submit' and text()=' Sign Up']")).click();
-        WebElement heading = driver.findElement(By.xpath("//div[@class='alert alert-danger']//p"));
 
-        Assert.assertTrue(heading.isDisplayed());
-        Assert.assertEquals(heading.getText(), "The Email field must contain a valid email address.");
+        List<String> heading = driver.findElements(By.xpath("//div[@class='alert alert-danger']//p"))
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+
+        Assert.assertTrue(heading.contains("The Email field must contain a valid email address."));
         driver.quit();
     }
 }
