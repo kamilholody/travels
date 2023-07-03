@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -86,6 +85,7 @@ public class HotelSearch {
 
         WebElement message = driver.findElement(By.xpath("//h2[text()='No Results Found']"));
 
+        Assert.assertTrue(message.isDisplayed());
         Assert.assertEquals(message.getText(), "No Results Found");
     }
 }
