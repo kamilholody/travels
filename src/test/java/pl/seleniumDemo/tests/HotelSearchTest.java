@@ -14,7 +14,7 @@ public class HotelSearchTest extends BaseTest {
 
     @Test
     public void searchHotelTest() {
-        HotelSearchPage hotelSearchPage = new HotelSearchPage();
+        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         hotelSearchPage.setCity("Dubai");
         hotelSearchPage.setDates("27/04/2023", "29/04/2023");
         hotelSearchPage.setTravellers();

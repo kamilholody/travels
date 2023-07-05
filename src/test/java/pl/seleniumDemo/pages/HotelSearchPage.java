@@ -1,6 +1,8 @@
 package pl.seleniumDemo.pages;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class HotelSearchPage {
 
@@ -19,17 +21,21 @@ public class HotelSearchPage {
         @FindBy(name = "checkout")
         private WebElement checkoutInput;
 
-        @FindBy(id = "travellersInput");
+        @FindBy(id = "travellersInput")
         private WebElement travellersInput;
 
-        @FindBy(id = "adultPlusBtn");
+        @FindBy(id = "adultPlusBtn")
         private WebElement adultPlusBtn;
 
-        @FindBy(id = "childPlusBtn");
+        @FindBy(id = "childPlusBtn")
         private WebElement childPlusBtn;
 
-        @FindBy(xpath = "//button[text()=' Search']");
+        @FindBy(xpath = "//button[text()=' Search']")
         private WebElement searchButton;
+
+        public HotelSearchPage(WebDriver driver) {
+            PageFactory.initElements(driver, this);
+        }
 
 
         public void setCity(String cityName) {
