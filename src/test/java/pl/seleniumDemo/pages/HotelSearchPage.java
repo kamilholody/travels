@@ -33,11 +33,13 @@ public class HotelSearchPage {
         @FindBy(xpath = "//button[text()=' Search']")
         private WebElement searchButton;
 
+        //Constructor
         public HotelSearchPage(WebDriver driver) {
             PageFactory.initElements(driver, this);
         }
 
 
+        //Methods
         public void setCity(String cityName) {
             searchHotelSpan.click();
             searchHotelIntput.sendKeys(cityName);
