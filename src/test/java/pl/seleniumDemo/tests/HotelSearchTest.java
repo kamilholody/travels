@@ -19,7 +19,7 @@ public class HotelSearchTest extends BaseTest {
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         hotelSearchPage.setCity("Dubai");
         hotelSearchPage.setDates("27/04/2023", "29/04/2023");
-        hotelSearchPage.setTravellers();
+        hotelSearchPage.setTravellers(1,2);
         hotelSearchPage.performSearch();
 
         ResultsPage resultsPage = new ResultsPage(driver);
@@ -34,29 +34,17 @@ public class HotelSearchTest extends BaseTest {
     }
 
     @Test
-    public void negativePathSearchHotelTest() {
+    public void searchHotelWithoutNameTest() {
 
-        driver.findElement(By.name("checkin")).sendKeys("24/07/2023");
-        driver.findElement(By.name("checkout")).click();
-        driver.findElements(By.xpath("//th[@class='next']"))
-                .stream()
-                .filter(WebElement::isDisplayed)
-                .findFirst()
-                .ifPresent(WebElement::click);
-        driver.findElements(By.xpath("//td[@class='day ' and text()='31']"))
-                .stream()
-                .filter(WebElement::isDisplayed)
-                .findFirst()
-                .ifPresent(WebElement::click);
+        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
+        hotelSearchPage.setDates("24/07/2023", "31/07/2023");
+        hotelSearchPage.setTravellers(0,1);
+        hotelSearchPage.performSearch();
 
-        driver.findElement(By.name("travellers")).click();
-        driver.findElement(By.id("childPlusBtn")).click();
-        driver.findElement(By.xpath("//button[@type='submit' and text()=' Search']")).click();
+        ResultsPage resultsPage = new ResultsPage(driver);
 
-        WebElement message = driver.findElement(By.xpath("//h2[text()='No Results Found']"));
-
-        Assert.assertTrue(message.isDisplayed());
-        Assert.assertEquals(message.getText(), "No Results Found");
+        Assert.assertTrue(resultsPage.resultHeading.isDisplayed());
+        Assert.assertEquals(resultsPage.getHeadingText(), "No Results Found");
 
     }
 }
