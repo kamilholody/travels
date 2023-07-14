@@ -1,15 +1,12 @@
 package pl.seleniumDemo.tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.seleniumDemo.pages.HotelSearchPage;
 import pl.seleniumDemo.pages.ResultsPage;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class HotelSearchTest extends BaseTest {
 
@@ -19,7 +16,7 @@ public class HotelSearchTest extends BaseTest {
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         hotelSearchPage.setCity("Dubai");
         hotelSearchPage.setDates("27/04/2023", "29/04/2023");
-        hotelSearchPage.setTravellers(1,2);
+        hotelSearchPage.setTravellers(1, 2);
         hotelSearchPage.performSearch();
 
         ResultsPage resultsPage = new ResultsPage(driver);
@@ -38,7 +35,7 @@ public class HotelSearchTest extends BaseTest {
 
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         hotelSearchPage.setDates("24/07/2023", "31/07/2023");
-        hotelSearchPage.setTravellers(0,1);
+        hotelSearchPage.setTravellers(0, 1);
         hotelSearchPage.performSearch();
 
         ResultsPage resultsPage = new ResultsPage(driver);
